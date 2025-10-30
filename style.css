@@ -441,3 +441,45 @@ body {
         font-size: 1.6em;
     }
 }
+
+/* ... (El CSS existente de Perfumes Select, con colores, header, y productos va aquí) ... */
+
+/* Estilos para el Buscador (NUEVO: Para que la lupa funcione) */
+#search-container {
+    /* Contiene el input y el ícono de la lupa */
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+#search-input {
+    /* Campo de texto de búsqueda, inicialmente oculto/pequeño */
+    width: 0;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    opacity: 0;
+    transition: width 0.4s ease, opacity 0.4s ease;
+}
+
+#search-input.visible {
+    /* Estado visible al hacer clic en la lupa */
+    width: 200px;
+    opacity: 1;
+    margin-right: 10px;
+}
+
+#search-icon {
+    /* Estilo de la lupa */
+    cursor: pointer;
+    color: var(--secondary-bg); /* o el color que uses en el header */
+    font-size: 1.4em;
+    transition: color 0.3s;
+}
+
+#search-icon:hover {
+    color: var(--accent-color);
+}
+
+/* ... (El resto del CSS se mantiene igual) ... */
