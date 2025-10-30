@@ -5,13 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.querySelector('.close-button');
     const cartCountSpan = document.getElementById('cart-count');
     const cartItemsDiv = document.getElementById('cart-items');
-    const addToCartButtons = document.querySelectorAll('.add-to-cart:not(:disabled)');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
     
     // Referencias del Buscador
     const searchIcon = document.getElementById('search-icon'); 
     const searchInput = document.getElementById('search-input');
     const productGrid = document.getElementById('product-grid'); 
-    // Capturamos todos los productos si el grid existe
     const allProducts = productGrid ? productGrid.querySelectorAll('.product-card') : []; 
 
     let cart = [];
@@ -39,16 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const productName = card.getAttribute('data-name').toLowerCase();
                 
                 if (productName.includes(searchTerm)) {
-                    // Importante: Usamos 'flex' para que los productos vuelvan a verse en el grid
                     card.style.display = 'flex'; 
                 } else {
-                    card.style.display = 'none'; // Ocultar
+                    card.style.display = 'none'; 
                 }
             });
         }
     }
     // --- FIN FUNCIÓN DE BÚSQUEDA ---
-
+    
     // --- Funcionalidad del Modal (Mostrar/Ocultar) ---
     cartButton.addEventListener('click', () => {
         modal.style.display = 'block';
