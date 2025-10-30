@@ -1,3 +1,4 @@
+
 /* Variables de Color (Moderno y Elegante) */
 :root {
     --primary-color: #121212; /* Negro Profundo */
@@ -439,6 +440,224 @@ body {
     }
     .logo {
         font-size: 1.6em;
+    }
+}
+/* Variables de Color (Moderno y Elegante) */
+:root {
+    --primary-color: #121212; /* Negro Profundo */
+    --accent-color: #D4AF37; /* Dorado Clásico */
+    --secondary-bg: #f5f5f5; /* Gris Claro / Marfil */
+    --text-color: #333;
+    --white: #fff;
+    --success-color: #27ae60;
+}
+
+/* Estilos Globales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+    transition: all 0.3s ease;
+}
+
+/* Encabezado (Header) */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: var(--primary-color);
+    color: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.logo-accent {
+    color: var(--accent-color);
+    font-weight: 300;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+}
+
+.cart-button {
+    color: var(--secondary-bg);
+    font-size: 1.4em;
+    cursor: pointer;
+    margin-left: 20px;
+    border: none;
+    background: none;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.cart-button:hover {
+    color: var(--accent-color);
+}
+
+#cart-count {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-size: 0.7em;
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* ESTILOS DEL BUSCADOR */
+#search-container {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    position: relative;
+}
+
+#search-input {
+    width: 0;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    opacity: 0;
+    transition: width 0.4s ease, opacity 0.4s ease;
+}
+
+#search-input.visible {
+    width: 200px; /* Ancho cuando está activo */
+    opacity: 1;
+    margin-right: 10px;
+}
+
+#search-icon {
+    color: var(--secondary-bg);
+    font-size: 1.4em;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#search-icon:hover {
+    color: var(--accent-color);
+}
+/* FIN ESTILOS DEL BUSCADOR */
+
+/* Sección Principal (Hero) */
+.hero-section {
+    background-color: #222;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('placeholder_perfume_hero.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 5%;
+    text-align: center;
+    color: var(--white);
+}
+
+/* ... (Otros estilos de Hero y Wholesale Info) ... */
+
+/* Sección de Productos */
+.products-section {
+    padding: 50px 5%;
+    text-align: center;
+    background-color: var(--secondary-bg);
+}
+
+.product-grid {
+    display: grid;
+    /* Usa auto-fit para que sea responsive */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    /* Establece Flexbox para mantener la alineación vertical */
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.product-title {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    min-height: 40px;
+}
+
+.product-info {
+    color: var(--text-color);
+    font-size: 0.9em;
+    min-height: 20px;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.add-to-cart {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 12px 25px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+    align-self: flex-end;
+}
+
+.add-to-cart:hover {
+    background-color: #c7a13d;
+}
+
+/* Estilos para el carrito y footer... (se mantienen) */
+
+/* Responsividad */
+@media (max-width: 768px) {
+    /* Ocultamos la navegación y ajustamos el buscador */
+    .nav {
+        display: none; 
+    }
+    #search-input.visible {
+        width: 120px; 
     }
 }
 
