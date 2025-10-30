@@ -6,8 +6,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartCountSpan = document.getElementById('cart-count');
     const cartItemsDiv = document.getElementById('cart-items');
     const addToCartButtons = document.querySelectorAll('.add-to-cart:not(:disabled)');
+    
+    // Referencias del Buscador
+    const searchIcon = document.getElementById('search-icon'); 
+    const searchInput = document.getElementById('search-input');
+    const productGrid = document.getElementById('product-grid'); 
+    // Capturamos todos los productos si el grid existe
+    const allProducts = productGrid ? productGrid.querySelectorAll('.product-card') : []; 
 
     let cart = [];
+
+    // --- FUNCIÓN DE BÚSQUEDA Y FILTRADO (LUPA) ---
+    if (searchIcon && searchInput && productGrid) {
+        // 1. Alternar visibilidad del campo de búsqueda al hacer clic en la lupa
+        searchIcon.addEventListener('click', () => {
+            searchInput.classList.toggle('visible');
+            if (searchInput.classList.contains('visible')) {
+                searchInput.focus(); 
+            } else {
+                searchInput.value = '';
+                filterProducts(); // Muestra todos los productos al ocultar
+            }
+        });
+
+        // 2. Filtrar productos al escribir
+        searchInput.addEventListener('keyup', filterProducts);
+
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            allProducts.forEach(card => {
+                const productName = card.getAttribute('data-name').toLowerCase();
+                
+                if (productName.includes(searchTerm)) {
+                    // Importante: Usamos 'flex' para que los productos vuelvan a verse en el grid
+                    card.style.display = 'flex'; 
+                } else {
+                    card.style.display = 'none'; // Ocultar
+                }
+            });
+        }
+    }
+    // --- FIN FUNCIÓN DE BÚSQUEDA ---
 
     // --- Funcionalidad del Modal (Mostrar/Ocultar) ---
     cartButton.addEventListener('click', () => {
@@ -42,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             updateCartCount();
-            // Notificación visual
             productCard.classList.add('added');
             setTimeout(() => {
                 productCard.classList.remove('added');
@@ -70,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
-        // Añadir listeners para eliminar
         document.querySelectorAll('.cart-item-remove').forEach(button => {
             button.addEventListener('click', removeItem);
         });
@@ -91,15 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const orderSummary = cart.map(item => `* ${item.quantity}x ${item.name.trim()}`).join('\n');
+        const orderSummary = cart.map(item => `* ${item.quantity}x ${item.name.trim()}`).join('%0A');
         
         const whatsappNumber = '1128770800'; 
         
-        // Mensaje Base con Saltos de Línea (usando %0A para mayor compatibilidad en Web/App)
         const message = 
-            `¡Hola Perfumes Select!%0A%0AMe gustaría hacer un pedido de perfumes:%0A%0A${orderSummary}%0A%0APor favor, envíenme los precios finales (unidad) y la confirmación de stock. ¡Gracias!`;
+            `¡Hola Perfumes Select!%0A%0AMe gustaría hacer un pedido de perfumes:%0A%0A${orderSummary}%0A%0APor favor, envíenme los precios finales (unidad/mayorista) y la confirmación de stock. ¡Gracias!`;
         
-        // Utilizamos encodeURI en lugar de encodeURIComponent para evitar problemas con la URL base
         const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
 
         window.open(whatsappURL, '_blank');
